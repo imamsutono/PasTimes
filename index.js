@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import HomeScreen from './src/components/HomeScreen';
+import App from './src/App';
 
-AppRegistry.registerComponent('PasTimes', () => HomeScreen);
+AppRegistry.registerComponent('PasTimes', () => App);
