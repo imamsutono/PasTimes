@@ -7,7 +7,7 @@ import * as globalStyles from '../styles/global';
 const Byline = ({ date, author, location }) => (
   <View>
     <View style={styles.row}>
-      <SmallText>{date.toLocaleDateString()}</SmallText>
+      <SmallText>{date}</SmallText>
       <SmallText>{author}</SmallText>
     </View>
     {location ? 
@@ -19,7 +19,7 @@ const Byline = ({ date, author, location }) => (
 );
 
 Byline.propTypes = {
-  date: PropTypes.instanceOf(Date).isRequired,
+  date: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   location: PropTypes.string
 };
