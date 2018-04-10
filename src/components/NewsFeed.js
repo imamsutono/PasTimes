@@ -26,9 +26,26 @@ class NewsFeed extends Component {
       modalUrl: ''
     };
 
+    this.refresh = this.refresh.bind(this);
     this.renderRow = this.renderRow.bind(this);
     this.onModalClose = this.onModalClose.bind(this);
     this.onModalOpen = this.onModalOpen.bind(this);
+  }
+
+  componentWillMount() {
+    this.refresh();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(nextProps)
+    });
+  }
+
+  refresh() {
+    if (this.props.loadNews) {
+      this.props.loadNews();
+    }
   }
 
   renderModal() {
@@ -92,30 +109,8 @@ class NewsFeed extends Component {
 
 NewsFeed.propTypes = {
   news: PropTypes.arrayOf(PropTypes.object),
-  listStyles: View.propTypes.style
-};
-
-NewsFeed.defaultProps = {
-  news: [
-    {
-      title: 'React Native',
-      imageUrl: 'https://facebook.github.io/react/img/logo_og.png',
-      description: 'Build Native Mobile Apps using JavaScript and React',
-      date: new Date(),
-      author: 'Facebook',
-      location: 'Menlo Park, California',
-      url: 'https://facebook.github.io/react-native'
-    },
-    {
-      title: 'Packt Publishing',
-      imageUrl: 'https://www.packtpub.com/sites/default/files/packt_logo.png',
-      description: 'Stay Relevant',
-      date: new Date(),
-      author: 'Packt Publishing',
-      location: 'Birmingham, UK',
-      url: 'https://www.packtpub.com/'
-    }
-  ]
+  listStyles: View.propTypes.style,
+  loadNews: PropTypes.func
 };
 
 const styles = StyleSheet.create({
